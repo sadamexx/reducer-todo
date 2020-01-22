@@ -13,13 +13,13 @@ body {
   color: hsl(198, 1%, 29%);
   font-family: "Architects Daughter", cursive;
   text-align: center;
-  font-size: 130%;
+  font-size: 140%;
 }
 
 .container {
   width: 100%;
   height: auto;
-  min-height: 500px;
+  min-height: 700px;
   max-width: 500px;
   min-width: 250px;
   background: #f1f5f8;
@@ -53,7 +53,7 @@ body {
   border: solid 3px transparent;
   border-bottom: dashed 3px #fdcb6e;
   font-family: "Architects Daughter", cursive;
-  font-size: 1rem;
+  font-size: 1.4rem;
   color: hsla(260, 2%, 25%, 0.7);
   width: 70%;
   margin-bottom: 20px;

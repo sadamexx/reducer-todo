@@ -1,47 +1,29 @@
-import React, { useState, useReducer } from "react";
-import { initialState } from "../reducers/list-reducer";
+import React, { useReducer } from "react";
+import  {startingTodo, listReducer}  from "../reducers/list-reducer";
+import ToDoForm from "./ToDoForm";
+import Task from "./Task";
 
 
 const ToDoList= () => {
-    const [state, dispatch] = useReducer(listReducer, initialState);
-    const [task, setTask] = useState('')
-    const [newTaskText, setNewInputText] = useState('');
-    
-
-    handleChange =(e) => {
-        const newValue = event.target.value;
-        setInputText(newValue);
+    const [state, dispatch] = useReducer(listReducer, startingTodo);
+        
+    const deleteItems = e => {
+        e.preventDefault()
+        dispatch({ type: "CLEAR_COMPLETED"})
     }
-
-    addItem = () => {
-        setTask(prevItems => {
-            return [...prevItems, inputText]
-        });
-        setInputText('');
-    }
-
     return(
         <div className="container">
             <div className="heading">
                 <h1>To-Do List</h1>
             </div>
-            <div className="form">
-                <input 
-                type="text"
-                onChange={handleChange}
-                value={newTaskText}
-                 />
-                <button onClick={addItem}>
-                    <span>Add</span>
+            <ToDoForm dispatch={dispatch}/>
+            
+            {state.map(task => {
+                return <Task key={task.id} task={task} dispatch={dispatch} />
+            })}
+            <button onClick={deleteItems}>
+                    <span>Delete Completed</span>
                 </button>
-            </div>
-            <div>
-                <ul>
-                    {items.map(todoItem => {
-                        return <li>{todoItem}</li>
-                    })};
-                </ul>
-            </div>
         </div>
     );
 };

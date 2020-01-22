@@ -1,39 +1,54 @@
 
-
-export const initialState = [
-       {
+export const startingTodo = [
+        {
         item: 'Wash my dog',
         completed: false,
-        id: 1234
+        id: 1
         },
         {
         item: 'Go grocery shopping',
         completed: false,
-        id: 4321
+        id: 2
         },
         {
             item: 'Make phone calls',
             completed: false,
-            id: 4567
+            id: 3
         },
         {
             item: 'Put gas in car',
             completed: false,
-            id: 7894
+            id: 4
         },
-
    ];
 
 
 
-const listReducer = (state, action) => {
+export const listReducer = (state, action) => {
     switch(action.type) {
-        case: "ADD_TODO":
-        return {
-            ...state,
-        }
-    }
-}
+        case "ADD_TODO":
+            return [
+                ...state,
+                {item: action.payload,
+                completed: false,
+                id: Date.now()}
+            ]
+        
+        case "TOGGLE_COMPLETE":
+            return state.map(task => {
+                if (task.id === action.payload) {
+                    return {...task, completed: !task.completed};
+                } else {
+                    return task;
+                }
+            })    
 
+        case "CLEAR_COMPLETED":
+               return state.filter(task => !task.completed);
+    
+        default:
+            return state;
+    }
+};
 
 
